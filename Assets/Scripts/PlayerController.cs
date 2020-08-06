@@ -5,11 +5,9 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour {
 
     public float speed = 2f;
+    public float maxSpeed = 5f;
     public float jumpForce = 5f;
     public Joystick joyStick;
-    public float bulletForce = 5f;
-    public GameObject bulletPrefab;
-    public Transform firePoint;
     private bool isGrounded;
 
     private Rigidbody2D rb;
@@ -34,7 +32,7 @@ public class PlayerController : MonoBehaviour {
         }else{
             moveInput.x = 0;
         }
-        moveVelocity = moveInput * speed * Time.deltaTime;
+        moveVelocity = moveInput * Time.deltaTime;
         if (isGrounded == true) {
             if (Input.GetButtonDown ("Jump")) {
                 rb.AddForce (new Vector2 (0, jumpForce), ForceMode2D.Impulse);
@@ -46,6 +44,10 @@ public class PlayerController : MonoBehaviour {
 
     private void FixedUpdate () {
         transform.position += moveVelocity;
+
+        if(rb.velocity.magnitude > maxSpeed){
+            rb.velocity = rb.velocity.normalized * maxSpeed;
+        }
         Animate ();
     }
 
@@ -54,19 +56,6 @@ public class PlayerController : MonoBehaviour {
         animator.SetFloat ("Speed", moveVelocity.magnitude);
         animator.SetBool ("Grounded", isGrounded);
 
-    }
-
-    void Shoot () {
-        Vector3 dir = Camera.main.ScreenToWorldPoint (Input.mousePosition);
-
-        dir = dir - transform.position;
-        float angle = Mathf.Atan2 (dir.y, dir.x) * Mathf.Rad2Deg;
-
-        GameObject bullet = Instantiate (bulletPrefab, transform.position, transform.rotation) as GameObject;
-        bullet.AddComponent<Rigidbody2D> ().gravityScale = 0;
-        bullet.GetComponent<Rigidbody2D> ().velocity = new Vector2 (dir.x * bulletForce, dir.y * bulletForce);
-        bullet.transform.rotation = Quaternion.AngleAxis (angle, Vector3.forward);
-        Destroy (bullet, 3);
     }
 
     private void OnCollisionEnter2D (Collision2D other) {
