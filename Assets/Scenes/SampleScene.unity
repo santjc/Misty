@@ -321,7 +321,7 @@ MonoBehaviour:
   m_Follow: {fileID: 462500706}
   m_Lens:
     FieldOfView: 60
-    OrthographicSize: 4
+    OrthographicSize: 3.5
     NearClipPlane: 0.3
     FarClipPlane: 1000
     Dutch: 0
@@ -344,7 +344,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 231286708}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 5.1899996, z: -10}
+  m_LocalPosition: {x: 0, y: 4.99, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1111021658}
@@ -581,7 +581,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &459983929
 RectTransform:
   m_ObjectHideFlags: 0
@@ -800,7 +800,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 4
+  orthographic size: 3.5
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -1228,8 +1228,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e7e4e2a0bc0d8a438531ceba998035a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pullForce: 0.5
-  pushForce: 2
   pushObject: 1
 --- !u!224 &809885000 stripped
 RectTransform:
@@ -1646,6 +1644,7 @@ GameObject:
   - component: {fileID: 1137570120}
   - component: {fileID: 1137570119}
   - component: {fileID: 1137570118}
+  - component: {fileID: 1137570121}
   m_Layer: 10
   m_Name: Object
   m_TagString: Object
@@ -1690,8 +1689,8 @@ Rigidbody2D:
   m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
+  m_UseAutoMass: 1
+  m_Mass: 0.25
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
@@ -1715,6 +1714,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1137570121
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1137570117}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a26ec344aad3be41ac045d311898508, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  power: 1
+  maxDrag: 2
 --- !u!1 &1142437518
 GameObject:
   m_ObjectHideFlags: 0
@@ -1817,7 +1830,7 @@ SpriteRenderer:
   m_SortingLayerID: 1797049833
   m_SortingLayer: 4
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: e7f577cf55764e84282f3483333e58bb, type: 3}
+  m_Sprite: {fileID: 21300000, guid: dba682b3278ebd349bfe9947055d4889, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -2115,7 +2128,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 267.5}
-  m_SizeDelta: {x: 160, y: 30}
+  m_SizeDelta: {x: 160, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1269827227
 MonoBehaviour:
@@ -2332,7 +2345,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1455326501
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3249,11 +3262,16 @@ PrefabInstance:
     - target: {fileID: 252680634442744409, guid: 2ee51e08f75abb74fac821c884fa4cdf,
         type: 3}
       propertyPath: maxSpeed
-      value: 5
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 252680634442744409, guid: 2ee51e08f75abb74fac821c884fa4cdf,
         type: 3}
       propertyPath: speed
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 252680634442744409, guid: 2ee51e08f75abb74fac821c884fa4cdf,
+        type: 3}
+      propertyPath: jumpForce
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 252680633730789501, guid: 2ee51e08f75abb74fac821c884fa4cdf,
@@ -3289,7 +3307,7 @@ PrefabInstance:
     - target: {fileID: 252680634442744411, guid: 2ee51e08f75abb74fac821c884fa4cdf,
         type: 3}
       propertyPath: m_SortingLayer
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 252680634442744411, guid: 2ee51e08f75abb74fac821c884fa4cdf,
         type: 3}
@@ -3300,7 +3318,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: -2428416184605311759, guid: 02c3f92a5ac4e5440bfdf3be29935f28,
+      objectReference: {fileID: 4633775153555399875, guid: 4f46e552b37d11347ab6d209b34023ec,
         type: 3}
     - target: {fileID: 252680634442744411, guid: 2ee51e08f75abb74fac821c884fa4cdf,
         type: 3}

@@ -5,8 +5,8 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour {
 
     public float speed = 2f;
-    public float maxSpeed = 5f;
-    public float jumpForce = 5f;
+    public float maxSpeed = 3f;
+    public float jumpForce = 2f;
     public Joystick joyStick;
     private bool isGrounded;
 
@@ -32,9 +32,9 @@ public class PlayerController : MonoBehaviour {
         }else{
             moveInput.x = 0;
         }
-        moveVelocity = moveInput * Time.deltaTime;
+        moveVelocity.x = moveInput.x * Time.deltaTime;
         if (isGrounded == true) {
-            if (Input.GetButtonDown ("Jump")) {
+            if (joyStick.Vertical > .5f) {
                 rb.AddForce (new Vector2 (0, jumpForce), ForceMode2D.Impulse);
                 isGrounded = false;
             }

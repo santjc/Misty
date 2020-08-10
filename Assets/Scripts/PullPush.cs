@@ -9,10 +9,10 @@ public class PullPush : MonoBehaviour {
     // public Button pushButton;
     private Rigidbody2D rb;
     private Animator animator;
-    public float pullForce = 3f;
-    public float pushForce = 2f;
     public bool pushObject;
     Vector3 mousePosition;
+    float pushForce = 2f;
+    float pullForce = 2f;
 
     int layerMask = 1 << 9;
 
@@ -26,25 +26,8 @@ public class PullPush : MonoBehaviour {
     // private void FixedUpdate() {
     //     pullBtn.onClick.AddListener(Pull());
     // }
-    private void FixedUpdate () {
-        mousePosition = Camera.main.ScreenToWorldPoint (Input.mousePosition);
+    
 
-        if (Input.GetMouseButton (0)) {
-            Debug.Log ("mouse1");
-            PushPullObject();
-        }
-    }
-
-    public void Pull () {
-
-        Vector3 diff = mousePosition - transform.position;
-        // diff.Normalize();
-        animator.SetFloat ("Horizontal", diff.x);
-        animator.SetFloat ("Speed", Mathf.Abs (diff.x));
-        rb.AddForce (diff * pullForce, ForceMode2D.Impulse);
-
-        // transform.position = Vector3.MoveTowards(transform.position,diff, force * Time.deltaTime);
-    }
 
     public void PushPullObject () {
         RaycastHit2D hit = Physics2D.Raycast (Camera.main.ScreenToWorldPoint (Input.mousePosition), Vector2.zero, layerMask);
@@ -66,4 +49,5 @@ public class PullPush : MonoBehaviour {
             }
         }
     }
+
 }
