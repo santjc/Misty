@@ -55,6 +55,9 @@ TagManager:
   - name: Floor
     uniqueID: 1173029013
     locked: 0
+  - name: Fog
+    uniqueID: 4033636191
+    locked: 0
   - name: Player
     uniqueID: 1797049833
     locked: 0
