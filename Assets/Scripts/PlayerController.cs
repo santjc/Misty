@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour {
 
     public float speed = 2f;
-    public float maxSpeed = 3f;
+    public float maxSpeed = 4f;
     public float jumpForce = 2f;
     public Joystick joyStick;
     private bool isGrounded;
