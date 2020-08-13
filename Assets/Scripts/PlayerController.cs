@@ -6,7 +6,7 @@ public class PlayerController : MonoBehaviour {
 
     public float speed = 2f;
     public float maxSpeed = 4f;
-    public float jumpForce = 2f;
+    public float jumpForce = 3f;
     public Joystick joyStick;
     private bool isGrounded;
 
@@ -33,12 +33,7 @@ public class PlayerController : MonoBehaviour {
             moveInput.x = 0;
         }
         moveVelocity.x = moveInput.x * Time.deltaTime;
-        if (isGrounded == true) {
-            if (joyStick.Vertical > .5f) {
-                rb.AddForce (new Vector2 (0, jumpForce), ForceMode2D.Impulse);
-                isGrounded = false;
-            }
-        }
+
 
     }
 
@@ -49,6 +44,13 @@ public class PlayerController : MonoBehaviour {
             rb.velocity = rb.velocity.normalized * maxSpeed;
         }
         Animate ();
+    }
+
+    public void Jump(){
+        if (isGrounded == true) {
+                rb.AddForce (Vector2.up * jumpForce, ForceMode2D.Impulse);
+                isGrounded = false;
+        }
     }
 
     void Animate () {

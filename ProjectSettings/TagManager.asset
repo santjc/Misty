@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Floor
   - Object
+  - Grap
   layers:
   - Default
   - TransparentFX
@@ -18,7 +19,7 @@ TagManager:
   - Background
   - Floor
   - Object
-  - 
+  - Interactable
   - 
   - 
   - 

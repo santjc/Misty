@@ -19,7 +19,7 @@ public class ObjectController : MonoBehaviour {
     }
     private void Update () {
         if (Input.touchCount > 0) {
-            touch = Input.GetTouch (1);
+            touch = Input.GetTouch (0);
 
             if (touch.phase == TouchPhase.Began) {
                 DragStart ();
@@ -47,9 +47,7 @@ public class ObjectController : MonoBehaviour {
         void DragRelease () {
             Vector3 dragReleasePos = Camera.main.ScreenToWorldPoint (touch.position);
             dragReleasePos.z = 0f;
-            Vector3 force = dragStartPos - dragReleasePos;
-            Vector3 clampedForce = Vector3.ClampMagnitude (force, maxDrag) * power;
-            rb.AddForce (clampedForce, ForceMode2D.Impulse);
+            transform.position = dragReleasePos;
         }
     }
 }
