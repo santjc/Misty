@@ -8,6 +8,7 @@ public class GrapplingHook : MonoBehaviour
     SpringJoint2D joint;
     Vector3 targetPos;
     Touch touch;
+    public bool activePull;
     RaycastHit2D hit;
     public float maxDist = 5f;
     public LayerMask mask;
@@ -22,8 +23,9 @@ public class GrapplingHook : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-         if (Input.touchCount > 0) {
+         if (Input.touchCount > 0 && activePull == true) {
             touch = Input.GetTouch (0);
+
 
             if (touch.phase == TouchPhase.Began) {
                 StartJoint();
@@ -33,6 +35,8 @@ public class GrapplingHook : MonoBehaviour
                 StopJoint ();
             }
          }
+
+
 
     }
 
@@ -53,4 +57,15 @@ public class GrapplingHook : MonoBehaviour
     void StopJoint(){
         joint.enabled = false;
     }
+
+
+    // public void Push() {
+    //     RaycastHit2D hit = Physics2D.Raycast (Camera.main.ScreenToWorldPoint (Input.mousePosition), Vector2.zero, layerMask);
+    //     Debug.DrawRay (transform.position, Camera.main.ScreenToWorldPoint (Input.mousePosition), Color.blue);
+    //     if (hit.collider != null) {
+    //         Rigidbody2D rbO = hit.collider.gameObject.GetComponent<Rigidbody2D> ();
+    //         Vector3 diff = transform.position - hit.collider.transform.position;
+    //             rbO.AddForce (-diff * pushForce, ForceMode2D.Impulse);
+    //     }
+    // }
 }
