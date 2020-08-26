@@ -7,7 +7,6 @@ public class GameController : MonoBehaviour {
 
     private GameObject player;
     private GameObject _object;
-    private GrapplingHook hookController;
     public Button activeHook;
     private Image btnImage;
     // Start is called before the first frame update
@@ -22,9 +21,5 @@ public class GameController : MonoBehaviour {
         _object.transform.position = Vector3.zero;
     }
 
-    public void ActiveHook () {
-        hookController = player.GetComponent<GrapplingHook> ();
-        hookController.activePull = true;
-    }
 
 }

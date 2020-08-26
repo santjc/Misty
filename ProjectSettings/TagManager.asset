@@ -6,7 +6,8 @@ TagManager:
   tags:
   - Floor
   - Object
-  - Grap
+  - Steel object
+  - steelObj
   layers:
   - Default
   - TransparentFX
