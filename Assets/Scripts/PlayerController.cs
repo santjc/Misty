@@ -6,7 +6,7 @@ public class PlayerController : MonoBehaviour {
 
     public float speed = 2f;
     public float maxSpeed = 4f;
-    public float jumpForce = 3f;
+    public float jumpForce = 5f;
     private bool isGrounded;
 
     private Rigidbody2D rb;
@@ -23,29 +23,33 @@ public class PlayerController : MonoBehaviour {
 
     // Update is called once per frame
     void Update () {
-        if (Input.GetKey (KeyCode.Z)) {
-            SteelPush ();
+        if (transform.position.y < 1.2) {
+            if (Input.GetKey (KeyCode.Z)) {
+                SteelPush ();
+            }
+
+            if (Input.GetKey (KeyCode.X)) {
+                IronPull ();
+            }
+
+            
         }
 
-        if (Input.GetKey (KeyCode.X)) {
-            IronPull ();
-        }
+         if (Input.GetKey (KeyCode.Space)) {
+                Jump ();
+            }
 
         Animate ();
-
 
     }
 
     private void FixedUpdate () {
         moveInput = Input.GetAxisRaw ("Horizontal");
-        rb.velocity = new Vector2((moveInput) * maxSpeed, rb.velocity.y);
+        rb.velocity = new Vector2 ((moveInput) * maxSpeed, rb.velocity.y);
 
-
-        
         if (rb.velocity.magnitude > maxSpeed) {
             rb.velocity = rb.velocity.normalized * maxSpeed;
         }
-        
 
     }
 
@@ -71,21 +75,38 @@ public class PlayerController : MonoBehaviour {
 
     public void SteelPush () {
         for (int i = 0; i < steelObj.Length; i++) {
-            Vector3 distance = transform.position - steelObj[i].transform.position;
-            float dMag = distance.magnitude;
-            if (dMag < 5f) {
-                rb.AddForce (distance * jumpForce, ForceMode2D.Impulse);
-            }
+            // Vector3 distance = steelObj[i].transform.position -transform.position;
+            // float dMag = distance.magnitude;
+            // if (dMag < 5f) {
+            //     rb.AddForce (distance.normalized * jumpForce, ForceMode2D.Impulse);
+            // }
+            float polarity = 1f;
+
+            Vector3 rawDirection = transform.position - steelObj[i].transform.position;
+
+            float distance = rawDirection.magnitude;
+            float distanceScale = Mathf.InverseLerp (5f, 0f, distance);
+            float attractionStrength = Mathf.Lerp (0f, jumpForce, distanceScale);
+
+            rb.AddForce (rawDirection.normalized * attractionStrength * polarity * jumpForce, ForceMode2D.Force);
         }
     }
 
     public void IronPull () {
         for (int i = 0; i < steelObj.Length; i++) {
-            Vector3 distance = transform.position - steelObj[i].transform.position;
-            float dMag = distance.magnitude;
-            if (dMag < 5f) {
-                rb.AddForce (-distance * jumpForce * jumpForce, ForceMode2D.Impulse);
-            }
+            // Vector3 distance = transform.position - steelObj[i].transform.position;
+            // float dMag = distance.magnitude;
+            // if (dMag < 5f) {
+            //     rb.AddForce (-distance * jumpForce, ForceMode2D.Impulse);
+            //     transform.position = Vector3.MoveTowards (transform.position, steelObj[i].transform.position, 0.05f);
+            // }
+            float polarity = -1f;
+            Vector3 rawDirection = transform.position - steelObj[i].transform.position;
+
+            float distance = rawDirection.magnitude;
+            float distanceScale = Mathf.InverseLerp (5f, 0f, distance);
+            float attractionStrength = Mathf.Lerp (0f, jumpForce, distanceScale);
+            rb.AddForce (rawDirection.normalized * attractionStrength * polarity * jumpForce, ForceMode2D.Force);
         }
     }
 }
