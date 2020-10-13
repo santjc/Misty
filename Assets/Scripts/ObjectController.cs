@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ObjectController : MonoBehaviour {
 
-    public Rigidbody2D playerRb;
+    
     private GameObject player;
     private LineRenderer lineRend;
     float distanceMag;

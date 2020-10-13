@@ -7,12 +7,10 @@ public class PlayerController : MonoBehaviour {
     public float speed = 2f;
     public float maxSpeed = 4f;
     public float jumpForce = 3f;
-    public Joystick joyStick;
     private bool isGrounded;
 
     private Rigidbody2D rb;
-    private Vector3 moveVelocity;
-    Vector3 moveInput;
+    float moveInput;
 
     public GameObject[] steelObj;
 
@@ -25,25 +23,29 @@ public class PlayerController : MonoBehaviour {
 
     // Update is called once per frame
     void Update () {
-
-        if (joyStick.Horizontal >= .2f) {
-            moveInput.x = speed;
-        } else if (joyStick.Horizontal <= -.2f) {
-            moveInput.x = -speed;
-        } else {
-            moveInput.x = 0;
+        if (Input.GetKey (KeyCode.Z)) {
+            SteelPush ();
         }
-        moveVelocity.x = moveInput.x * Time.deltaTime;
+
+        if (Input.GetKey (KeyCode.X)) {
+            IronPull ();
+        }
+
+        Animate ();
+
 
     }
 
     private void FixedUpdate () {
-        transform.position += moveVelocity;
+        moveInput = Input.GetAxisRaw ("Horizontal");
+        rb.velocity = new Vector2((moveInput) * maxSpeed, rb.velocity.y);
 
+
+        
         if (rb.velocity.magnitude > maxSpeed) {
             rb.velocity = rb.velocity.normalized * maxSpeed;
         }
-        Animate ();
+        
 
     }
 
@@ -55,8 +57,8 @@ public class PlayerController : MonoBehaviour {
     }
 
     void Animate () {
-        animator.SetFloat ("Horizontal", moveInput.x);
-        animator.SetFloat ("Speed", moveVelocity.magnitude);
+        animator.SetFloat ("Horizontal", moveInput);
+        animator.SetFloat ("Speed", rb.velocity.magnitude);
         animator.SetBool ("Grounded", isGrounded);
 
     }
@@ -77,7 +79,7 @@ public class PlayerController : MonoBehaviour {
         }
     }
 
-    public void IronPull(){
+    public void IronPull () {
         for (int i = 0; i < steelObj.Length; i++) {
             Vector3 distance = transform.position - steelObj[i].transform.position;
             float dMag = distance.magnitude;
