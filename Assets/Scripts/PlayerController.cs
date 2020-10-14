@@ -55,7 +55,7 @@ public class PlayerController : MonoBehaviour {
 
     public void Jump () {
         if (isGrounded == true) {
-            rb.AddForce (Vector2.up * jumpForce, ForceMode2D.Impulse);
+            rb.AddForce (Vector2.up * jumpForce * 2f, ForceMode2D.Impulse);
             isGrounded = false;
         }
     }

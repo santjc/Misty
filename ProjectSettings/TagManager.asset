@@ -21,7 +21,7 @@ TagManager:
   - Floor
   - Object
   - Interactable
-  - 
+  - CAM_BOUNDS
   - 
   - 
   - 
@@ -47,6 +47,9 @@ TagManager:
     locked: 0
   - name: Wall
     uniqueID: 3456167595
+    locked: 0
+  - name: sky
+    uniqueID: 1113430865
     locked: 0
   - name: Background
     uniqueID: 1120765673
